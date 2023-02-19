@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +26,8 @@
   .row {
     margin: 16px 0 16px 0;
   }
-  .col {
-  }
+  /* .col {
+  } */
   .cost-item {
     display: flex;
     align-items: center;
@@ -104,18 +103,10 @@
 <!-- Include Handlebars from a CDN -->
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 <script>
-  // get source of template
-  let source = document.getElementById("page-template").innerHTML;
-
-  // compile the template
-  let template = Handlebars.compile(source);
-
-  // execute the compiled template and print the output to the console
-  document.body.innerHTML = template(
-    {
+  let data = {
       "name": "В лес к медведям",
-      "start": new Date(1677549285000).toLocaleDateString('ru-RU'),
-      "end": new Date(1680227688000).toLocaleDateString('ru-RU'),
+      "start": "1677549285000",
+      "end": "1680227688000",
       "maxPeople": 10,
       "duration": 31,
       "images": [
@@ -149,6 +140,20 @@
       "isHidden": false,
       "isModerated": true,
       "billsList": []
-    })
+    }
+
+    data.start = new Date(Number(data.start)).toLocaleDateString('ru-RU')
+    data.end = new Date(Number(data.end)).toLocaleDateString('ru-RU')
+
+  // get source of template
+  let source = document.getElementById("page-template").innerHTML;
+
+  // compile the template
+  let template = Handlebars.compile(source);
+
+  // execute the compiled template and print the output to the console
+  document.body.innerHTML = template(
+    data
+  )
 </script>
 </html>
